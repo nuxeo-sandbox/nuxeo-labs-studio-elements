@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`nuxeo-labs-studio-elements`
+Dependencies for creating Web components in Nuxeo Studio.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="nuxeo-labs-studio-elements">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'nuxeo-labs-studio-elements',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'nuxeo-labs-studio-elements',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
