@@ -5,9 +5,14 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.6.0",
     "google-chart": "^1.1.0",
-    "paper-elements": "Polymer/paper-elements#^0.5.6",
     "iron-elements": "PolymerElements/iron-elements#^1.0.10",
     "nuxeo-elements": "nuxeo/nuxeo-elements#^0.4.0",
-    "nuxeo-dataviz-elements": "nuxeo/nuxeo-dataviz-elements#^0.4.0"
+    "nuxeo-dataviz-elements": "nuxeo/nuxeo-dataviz-elements#^0.4.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }
