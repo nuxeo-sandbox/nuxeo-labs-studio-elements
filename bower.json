@@ -41,6 +41,7 @@
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.1.2",
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.6",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.2",
-    "moment": "^2.14.1"
+    "moment": "2.10.6",
+    "nuxeo-labs-elements": "nuxeo-sandbox/nuxeo-labs-elements#^3.4.0"
   }
 }
