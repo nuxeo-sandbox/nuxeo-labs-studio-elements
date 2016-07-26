@@ -3,7 +3,8 @@
   "description": "Dependencies for creating Web components in Nuxeo Studio.",
   "main": "nuxeo-labs-studio-elements.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "google-chart": "^1.1.0"
+    "polymer": "Polymer/polymer#^1.6.0",
+    "google-chart": "^1.1.0",
+    "paper-elements": "Polymer/paper-elements#^0.5.6"
   }
 }
