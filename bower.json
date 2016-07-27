@@ -1,5 +1,6 @@
 {
   "name": "nuxeo-labs-studio-elements",
+  "version": "1.0.0",
   "description": "Dependencies for creating Web components in Nuxeo Studio.",
   "main": "nuxeo-labs-studio-elements.html",
   "dependencies": {
