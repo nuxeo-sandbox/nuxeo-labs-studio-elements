@@ -25,7 +25,7 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-var APP = 'src/main/nuxeo-labs-studio-elements',
+var APP = 'src/main/app',
     DIST = 'target/classes/nuxeo.war/nuxeo-labs-studio-elements';
 
 var styleTask = function (stylesPath, srcs) {
@@ -94,9 +94,9 @@ gulp.task('copy', function () {
   //var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
   //    .pipe(gulp.dest('dist/sw-toolbox'));
 
-  var vulcanized = gulp.src([APP + '/nuxeo-labs-studio-elements.html'])
-    .pipe(gulpPlugins.rename('nuxeo-labs-studio-elements.vulcanized.html'))
-    .pipe(gulp.dest(DIST));
+  var vulcanized = gulp.src([APP + '/elements/elements.html'])
+    .pipe(gulpPlugins.rename('elements.vulcanized.html'))
+    .pipe(gulp.dest(DIST + '/elements'));
 
   return merge(app, bower, elements, vulcanized)
     .pipe(gulpPlugins.size({title: 'copy'}));
@@ -111,9 +111,9 @@ gulp.task('fonts', function () {
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
-  return gulp.src([APP +'/**/*.html'])
+  return gulp.src([APP +'/**/*.html', '!' + APP + '/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
-    .pipe(gulpPlugins.if('*.html', gulpPlugins.replace('nuxeo-labs-studio-elements.html', 'nuxeo-labs-studio-elements.vulcanized.html')))
+    .pipe(gulpPlugins.if('*.html', gulpPlugins.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     // Concatenate And Minify JavaScript
     .pipe(gulpPlugins.if('*.js', gulpPlugins.uglify({preserveComments: 'some'})))
     // Concatenate And Minify Styles
@@ -133,9 +133,9 @@ gulp.task('html', function () {
 
 // Vulcanize imports
 gulp.task('vulcanize', function () {
-  var DEST_DIR = DIST + '/nuxeo-labs-studio-elements.html';
+  var DEST_DIR = DIST + '/elements';
 
-  return gulp.src(DIST + '/nuxeo-labs-studio-elements.vulcanized.html')
+  return gulp.src(DIST + '/elements/elements.vulcanized.html')
     .pipe(gulpPlugins.vulcanize({
       dest: DEST_DIR,
       strip: true,
@@ -149,7 +149,7 @@ gulp.task('vulcanize', function () {
     .pipe(gulpPlugins.size({title: 'vulcanize'}));
 });
 
-// Delete all unnecessary bower dependencies but save the ones we need!
+// Delete all unnecessary bower dependencies
 gulp.task('dist:bower', function (cb) {
   del([
     DIST + '/bower_components/**/*',
