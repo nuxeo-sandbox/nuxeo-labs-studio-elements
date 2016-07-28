@@ -4,7 +4,9 @@ A Nuxeo Package that provides a set of commonly used [Polymer](https://www.polym
 
 ## Usage
 
-In your widget/layout xhtml, make sure you have the following imports:
+Install the Nuxeo Pacakge in your server.
+
+In your widget/layout xhtml in Studio, make sure you have the following imports:
 
     <h:outputScript src="/nuxeo-labs-studio-elements/bower_components/webcomponentsjs/webcomponents-lite.js" target="" />
     <h:outputScript src="/nuxeo-labs-studio-elements/bower_components/moment/min/moment-with-locales.min.js" target="" />
