@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 // Include Gulp & Tools We'll Use
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+var gulpLoadPlugins = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
@@ -41,12 +41,12 @@ var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join(APP, stylesPath, src);
     }))
-    .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+    .pipe(gulpLoadPlugins.changed(stylesPath, {extension: '.css'}))
+    .pipe(gulpLoadPlugins.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.if('*.css', $.minifyCss()))
+    .pipe(gulpLoadPlugins.if('*.css', gulpLoadPlugins.minifyCss()))
     .pipe(gulp.dest(DIST + '/' + stylesPath))
-    .pipe($.size({title: stylesPath}));
+    .pipe(gulpLoadPlugins.size({title: stylesPath}));
 };
 
 // Compile and Automatically Prefix Stylesheets
@@ -66,21 +66,21 @@ gulp.task('jshint', function () {
       APP + '/elements/**/*.html'
     ])
     .pipe(reload({stream: true, once: true}))
-    .pipe($.jshint.extract()) // Extract JS from .html files
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+    .pipe(gulpLoadPlugins.jshint.extract()) // Extract JS from .html files
+    .pipe(gulpLoadPlugins.jshint())
+    .pipe(gulpLoadPlugins.jshint.reporter('jshint-stylish'))
+    .pipe(gulpLoadPlugins.if(!browserSync.active, gulpLoadPlugins.jshint.reporter('fail')));
 });
 
 // Optimize Images
 gulp.task('images', function () {
   return gulp.src(APP + '/images/**/*')
-    .pipe($.imagemin({
+    .pipe(gulpLoadPlugins.imagemin({
       progressive: true,
       interlaced: true
     }))
     .pipe(gulp.dest(DIST + '/images'))
-    .pipe($.size({title: 'images'}));
+    .pipe(gulpLoadPlugins.size({title: 'images'}));
 });
 
 // Copy All Files At The Root Level (app)
@@ -104,44 +104,44 @@ gulp.task('copy', function () {
   //    .pipe(gulp.dest('dist/sw-toolbox'));
 
   var vulcanized = gulp.src([APP + '/elements/elements.html'])
-    .pipe($.rename('elements.vulcanized.html'))
+    .pipe(gulpLoadPlugins.rename('elements.vulcanized.html'))
     .pipe(gulp.dest(DIST + '/elements'));
 
   return merge(app, bower, elements, vulcanized)
-    .pipe($.size({title: 'copy'}));
+    .pipe(gulpLoadPlugins.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
 gulp.task('fonts', function () {
   return gulp.src([APP + '/fonts/**'])
     .pipe(gulp.dest(DIST + '/fonts'))
-    .pipe($.size({title: 'fonts'}));
+    .pipe(gulpLoadPlugins.size({title: 'fonts'}));
 });
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', APP, DIST]});
+  var assets = gulpLoadPlugins.useref.assets({searchPath: ['.tmp', APP, DIST]});
 
   return gulp.src([APP +'/**/*.html', '!' + APP + '/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
-    .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
+    .pipe(gulpLoadPlugins.if('*.html', gulpLoadPlugins.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
     // Concatenate And Minify JavaScript
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+    .pipe(gulpLoadPlugins.if('*.js', gulpLoadPlugins.uglify({preserveComments: 'some'})))
     // Concatenate And Minify Styles
     // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.minifyCss()))
+    .pipe(gulpLoadPlugins.if('*.css', gulpLoadPlugins.minifyCss()))
     .pipe(assets.restore())
-    .pipe($.useref())
+    .pipe(gulpLoadPlugins.useref())
     // Minify Any HTML
-    .pipe($.if('*.html', $.minifyHtml({
+    .pipe(gulpLoadPlugins.if('*.html', gulpLoadPlugins.minifyHtml({
       quotes: true,
       empty: true,
       spare: true
     })))
     // Output Files
     .pipe(gulp.dest(DIST))
-    .pipe($.size({title: 'html'}));
+    .pipe(gulpLoadPlugins.size({title: 'html'}));
 });
 
 // Vulcanize imports
@@ -149,7 +149,7 @@ gulp.task('vulcanize', function () {
   var DEST_DIR = DIST + '/elements';
 
   return gulp.src(DIST + '/elements/elements.vulcanized.html')
-    .pipe($.vulcanize({
+    .pipe(gulpLoadPlugins.vulcanize({
       dest: DEST_DIR,
       strip: true,
       inlineCss: true,
@@ -159,7 +159,7 @@ gulp.task('vulcanize', function () {
        console.log( err );
     })
     .pipe(gulp.dest(DEST_DIR))
-    .pipe($.size({title: 'vulcanize'}));
+    .pipe(gulpLoadPlugins.size({title: 'vulcanize'}));
 });
 
 // Delete all unnecessary bower dependencies
