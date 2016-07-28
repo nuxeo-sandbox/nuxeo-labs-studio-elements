@@ -41,6 +41,9 @@ Contributors:
 
 <body unresolved
     class="fullbleed">
+
+  <span id="browser-sync-binding"></span>
+
   <template is="dom-bind">
 
     <h1>Use this demo file to test your dependencies</h1>
@@ -86,13 +89,61 @@ Contributors:
 
     <h2>Nuxeo Stuff</h2>
 
+    <!-- Note: this server doesn't actually have ES passthrough enabled so this
+    won't work. Modify as needed. -->
     <nuxeo-connection url="http://demo.nuxeo.com/nuxeo"
         username="Administrator"
         password="Administrator">
     </nuxeo-connection>
 
+    <nuxeo-repository-data grouped-by="dc:lastContributor"
+        data="{{topContributors}}">
+    </nuxeo-repository-data>
+
+    <paper-card heading="Top Contributors">
+      <div class="card-content">
+        <google-chart type='treemap'
+            options='{"maxPostDepth":2}'
+            data="[[_treeFor(topContributors)]]">
+        </google-chart>
+      </div>
+    </paper-card>
+
+
+
 
   </template>
+
+  <script>
+    var t = document.querySelector('template');
+
+    // produces a table with "Label", "Parent", "Value"] for usage in a treemap
+    t._treeFor = function(data, separator) {
+      var separator = separator || '/';
+      var res = [
+        ["", "Parent", "Value"],
+        ["All", null, 0]
+      ];
+      var parents = {}; // aggregate results in the parent
+      data.forEach(function(e) {
+        var parts = e.key.split(separator),
+          parentKey = parts[0],
+          key = parts[1];
+        res.push([key, parentKey, e.value]);
+
+        if (!parents[parentKey]) {
+          parents[parentKey] = e.value;
+        } else {
+          parents[parentKey] += e.value;
+        }
+      });
+
+      for (var key in parents) {
+        res.push([key, "All", parents[key]]);
+      }
+      return res;
+    };
+  </script>
 
 </body>
 
