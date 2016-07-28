@@ -1,17 +1,8 @@
-/*
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
 'use strict';
 
 // Include Gulp & Tools We'll Use
 var gulp = require('gulp');
-var gulpLoadPlugins = require('gulp-load-plugins')();
+var gulpPlugins = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
@@ -41,12 +32,12 @@ var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join(APP, stylesPath, src);
     }))
-    .pipe(gulpLoadPlugins.changed(stylesPath, {extension: '.css'}))
-    .pipe(gulpLoadPlugins.autoprefixer(AUTOPREFIXER_BROWSERS))
+    .pipe(gulpPlugins.changed(stylesPath, {extension: '.css'}))
+    .pipe(gulpPlugins.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe(gulpLoadPlugins.if('*.css', gulpLoadPlugins.minifyCss()))
+    .pipe(gulpPlugins.if('*.css', gulpPlugins.minifyCss()))
     .pipe(gulp.dest(DIST + '/' + stylesPath))
-    .pipe(gulpLoadPlugins.size({title: stylesPath}));
+    .pipe(gulpPlugins.size({title: stylesPath}));
 };
 
 // Compile and Automatically Prefix Stylesheets
@@ -66,21 +57,21 @@ gulp.task('jshint', function () {
       APP + '/elements/**/*.html'
     ])
     .pipe(reload({stream: true, once: true}))
-    .pipe(gulpLoadPlugins.jshint.extract()) // Extract JS from .html files
-    .pipe(gulpLoadPlugins.jshint())
-    .pipe(gulpLoadPlugins.jshint.reporter('jshint-stylish'))
-    .pipe(gulpLoadPlugins.if(!browserSync.active, gulpLoadPlugins.jshint.reporter('fail')));
+    .pipe(gulpPlugins.jshint.extract()) // Extract JS from .html files
+    .pipe(gulpPlugins.jshint())
+    .pipe(gulpPlugins.jshint.reporter('jshint-stylish'))
+    .pipe(gulpPlugins.if(!browserSync.active, gulpPlugins.jshint.reporter('fail')));
 });
 
 // Optimize Images
 gulp.task('images', function () {
   return gulp.src(APP + '/images/**/*')
-    .pipe(gulpLoadPlugins.imagemin({
+    .pipe(gulpPlugins.imagemin({
       progressive: true,
       interlaced: true
     }))
     .pipe(gulp.dest(DIST + '/images'))
-    .pipe(gulpLoadPlugins.size({title: 'images'}));
+    .pipe(gulpPlugins.size({title: 'images'}));
 });
 
 // Copy All Files At The Root Level (app)
@@ -103,53 +94,49 @@ gulp.task('copy', function () {
   //var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
   //    .pipe(gulp.dest('dist/sw-toolbox'));
 
-  var vulcanized = gulp.src([APP + '/elements/elements.html'])
-    .pipe(gulpLoadPlugins.rename('elements.vulcanized.html'))
-    .pipe(gulp.dest(DIST + '/elements'));
+  var vulcanized = gulp.src([APP + '/nuxeo-labs-studio-elements.html'])
+    .pipe(gulpPlugins.rename('nuxeo-labs-studio-elements.vulcanized.html'))
+    .pipe(gulp.dest(DIST));
 
   return merge(app, bower, elements, vulcanized)
-    .pipe(gulpLoadPlugins.size({title: 'copy'}));
+    .pipe(gulpPlugins.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
 gulp.task('fonts', function () {
   return gulp.src([APP + '/fonts/**'])
     .pipe(gulp.dest(DIST + '/fonts'))
-    .pipe(gulpLoadPlugins.size({title: 'fonts'}));
+    .pipe(gulpPlugins.size({title: 'fonts'}));
 });
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
-  var assets = gulpLoadPlugins.useref.assets({searchPath: ['.tmp', APP, DIST]});
-
-  return gulp.src([APP +'/**/*.html', '!' + APP + '/{elements,test}/**/*.html'])
+  return gulp.src([APP +'/**/*.html'])
     // Replace path for vulcanized assets
-    .pipe(gulpLoadPlugins.if('*.html', gulpLoadPlugins.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
-    .pipe(assets)
+    .pipe(gulpPlugins.if('*.html', gulpPlugins.replace('nuxeo-labs-studio-elements.html', 'nuxeo-labs-studio-elements.vulcanized.html')))
     // Concatenate And Minify JavaScript
-    .pipe(gulpLoadPlugins.if('*.js', gulpLoadPlugins.uglify({preserveComments: 'some'})))
+    .pipe(gulpPlugins.if('*.js', gulpPlugins.uglify({preserveComments: 'some'})))
     // Concatenate And Minify Styles
     // In case you are still using useref build blocks
-    .pipe(gulpLoadPlugins.if('*.css', gulpLoadPlugins.minifyCss()))
-    .pipe(assets.restore())
-    .pipe(gulpLoadPlugins.useref())
+    .pipe(gulpPlugins.if('*.css', gulpPlugins.minifyCss()))
+    .pipe(gulpPlugins.useref())
     // Minify Any HTML
-    .pipe(gulpLoadPlugins.if('*.html', gulpLoadPlugins.minifyHtml({
+    .pipe(gulpPlugins.if('*.html', gulpPlugins.minifyHtml({
       quotes: true,
       empty: true,
       spare: true
     })))
     // Output Files
     .pipe(gulp.dest(DIST))
-    .pipe(gulpLoadPlugins.size({title: 'html'}));
+    .pipe(gulpPlugins.size({title: 'html'}));
 });
 
 // Vulcanize imports
 gulp.task('vulcanize', function () {
-  var DEST_DIR = DIST + '/elements';
+  var DEST_DIR = DIST + '/nuxeo-labs-studio-elements.html';
 
-  return gulp.src(DIST + '/elements/elements.vulcanized.html')
-    .pipe(gulpLoadPlugins.vulcanize({
+  return gulp.src(DIST + '/nuxeo-labs-studio-elements.vulcanized.html')
+    .pipe(gulpPlugins.vulcanize({
       dest: DEST_DIR,
       strip: true,
       inlineCss: true,
@@ -159,10 +146,10 @@ gulp.task('vulcanize', function () {
        console.log( err );
     })
     .pipe(gulp.dest(DEST_DIR))
-    .pipe(gulpLoadPlugins.size({title: 'vulcanize'}));
+    .pipe(gulpPlugins.size({title: 'vulcanize'}));
 });
 
-// Delete all unnecessary bower dependencies
+// Delete all unnecessary bower dependencies but save the ones we need!
 gulp.task('dist:bower', function (cb) {
   del([
     DIST + '/bower_components/**/*',

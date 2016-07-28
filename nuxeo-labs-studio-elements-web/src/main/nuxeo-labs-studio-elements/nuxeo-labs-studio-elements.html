@@ -17,11 +17,6 @@ limitations under the License.
 Contributors:
   Joshua Fletcher <jfletcher@nuxeo.com>
 -->
-<!--
-`nuxeo-labs-studio-elements`
-Dependencies for creating Web components in Nuxeo Studio.
--->
-
 <link rel="import" href="../polymer/polymer.html">
 
 <!-- Iron elements -->
@@ -61,4 +56,23 @@ Dependencies for creating Web components in Nuxeo Studio.
 <link rel="import" href="../nuxeo-dataviz-elements/nuxeo-dataviz-elements.html">
 
 <!-- Presales stuff -->
-<link rel="import" href="../nuxeo-labs-elements/nuxeo-labs-elements.html"
+<link rel="import" href="../nuxeo-labs-elements/nuxeo-labs-elements.html">
+<!--
+`nuxeo-labs-studio-elements`
+Dependencies for creating Web components in Nuxeo Studio.
+-->
+<dom-module id="nuxeo-labs-studio-elements">
+
+  <template>
+    <paper-button></paper-button>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'nuxeo-labs-studio-elements'
+
+    });
+  </script>
+
+</dom-module>
