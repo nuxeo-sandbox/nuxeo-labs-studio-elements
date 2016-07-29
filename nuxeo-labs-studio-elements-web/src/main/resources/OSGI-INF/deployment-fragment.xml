@@ -2,7 +2,7 @@
 <fragment version="1">
 
   <install>
-    <unzip from="${bundle.fileName}" to="/" prefix="web"></unzip>
+    <unzip from="${bundle.fileName}" to="/"></unzip>
   </install>
 
 </fragment>
