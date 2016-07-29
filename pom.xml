@@ -74,12 +74,12 @@
       <dependency>
         <groupId>org.nuxeo.labs.studio.elements</groupId>
         <artifactId>nuxeo-labs-studio-elements-web</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.labs.studio.elements</groupId>
         <artifactId>nuxeo-labs-studio-elements-np</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
