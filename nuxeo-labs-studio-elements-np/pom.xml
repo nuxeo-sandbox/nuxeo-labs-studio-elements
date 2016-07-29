@@ -25,7 +25,6 @@
       <type>zip</type>
       <scope>provided</scope>
     </dependency>
-
     <!-- Additional bundles to be deployed by the MP -->
     <dependency>
       <groupId>org.nuxeo.labs.studio.elements</groupId>

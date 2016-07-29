@@ -11,9 +11,7 @@
   </parent>
 
   <artifactId>nuxeo-labs-studio-elements-web</artifactId>
-
   <name>Nuxeo Labs Studio Elements</name>
-
   <description>Dependencies for creating Web components in Nuxeo Studio.</description>
 
   <build>
