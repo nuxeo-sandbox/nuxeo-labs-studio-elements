@@ -1,8 +1,8 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
 <package type="addon" name="nuxeo-labs-studio-elements" version="@VERSION@">
-  <title>Nuxeo labs geographic filter</title>
+  <title>Nuxeo Labs Studio Elements</title>
   <description>
-    <p>Put here an HTML description of your Nuxeo Package.</p>
+    <p>Polymer elements for building layouts and templates via Nuxeo Studio.</p>
   </description>
   <!-- <home-page>http://doc.nuxeo.com/</home-page> -->
   <vendor>Nuxeo</vendor>
