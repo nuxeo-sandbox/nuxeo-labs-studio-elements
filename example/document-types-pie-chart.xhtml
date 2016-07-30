@@ -1,0 +1,91 @@
+<f:subview xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:nxd="http://nuxeo.org/nxweb/document"
+    xmlns:nxl="http://nuxeo.org/nxforms/layout"
+    xmlns:nxu="http://nuxeo.org/nxweb/util"
+    xmlns:nxr="http://nuxeo.org/nxweb/resources">
+
+  <h:outputScript src="nuxeo-labs-studio-elements/bower_components/webcomponentsjs/webcomponents-lite.min.js"
+      target="" />
+  <h:outputScript src="nuxeo-labs-studio-elements/bower_components/moment/min/moment-with-locales.min.js"
+      target="" />
+  <nxr:import src="nuxeo-labs-studio-elements/elements/elements.vulcanized.html"
+      target="" />
+
+  <style is="custom-style">
+    chart-pie {
+      margin: 25px auto 0 auto;
+      width: 300px;
+      display: block;
+      font-size: 0.8em;
+    }
+
+    chart-pie::content .chart-legend ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    chart-pie::content .chart-legend li {
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 5px;
+    }
+
+    chart-pie::content .chart-legend li span {
+      height: 12px;
+      width: 12px;
+      border-radius: 3px;
+      display: table-cell;
+    }
+
+    .charts {
+      display: inline-flex;
+    }
+  </style>
+
+
+  <template is="dom-bind">
+
+    <nuxeo-connection url="/nuxeo"></nuxeo-connection>
+
+    <!-- Entity Types -->
+    <nuxeo-repository-data ecm-primary-type="File,Note,Folder,Collection,Workspace"
+        grouped-by="ecm:primaryType"
+        group-limit="10"
+        data="{{typeCount}}">
+    </nuxeo-repository-data>
+
+    <nuxeo-labs-chart-data data="[[typeCount]]"
+        series="{{series}}"
+        values="{{values}}"
+        rows="{{rows}}">
+    </nuxeo-labs-chart-data>
+
+    <div class="charts">
+
+      <paper-card heading="Entity Types">
+        <div class="card-content">
+          <chart-pie values="[[values]]"
+              series="[[series]]"
+              options='{"responsive": true, "animation": false}'>
+          </chart-pie>
+        </div>
+      </paper-card>
+
+      <paper-card heading="Entity Types">
+        <div class="card-content">
+          <google-chart class="center-chart"
+              type="pie"
+              cols='[{"label": "Type", "type": "string"},{"label": "Value", "type": "number"}]'
+              rows="[[rows]]">
+          </google-chart>
+        </div>
+      </paper-card>
+
+    </div>
+
+  </template>
+
+</f:subview>

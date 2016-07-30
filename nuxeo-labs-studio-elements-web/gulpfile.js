@@ -156,6 +156,9 @@ gulp.task('dist:bower', function (cb) {
     '!' + DIST + '/bower_components/jquery',
     '!' + DIST + '/bower_components/jquery/dist',
     '!' + DIST + '/bower_components/jquery/dist/jquery.min.js',
+    '!' + DIST + '/bower_components/moment',
+    '!' + DIST + '/bower_components/moment/min',
+    '!' + DIST + '/bower_components/moment/min/moment-with-locales.min.js',  
     '!' + DIST + '/bower_components/webcomponentsjs',
     '!' + DIST + '/bower_components/webcomponentsjs/webcomponents-lite.min.js'
   ], cb);
