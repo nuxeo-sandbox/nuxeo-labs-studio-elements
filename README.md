@@ -4,7 +4,7 @@ A Nuxeo Package that provides a set of commonly used [Polymer](https://www.polym
 
 ## Usage
 
-Install the Nuxeo Pacakge in your server.
+Install the Nuxeo Package in your server.
 
 In your widget/layout xhtml in Studio, make sure you have the following imports:
 
