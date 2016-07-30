@@ -19,6 +19,7 @@
     "merge-stream": "^1.0.0",
     "proxy-middleware": "^0.15.0",
     "run-sequence": "^1.2.2",
-    "vulcanize": "^1.14.8"
+    "vulcanize": "^1.14.8",
+    "glob": "^4.0.3"
   }
 }
