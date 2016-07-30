@@ -22,6 +22,10 @@ An example widget is provided in the `example` folder.
 
 ## Building
 
+The project is under CI:
+
+<a href='https://qa.nuxeo.org/jenkins/job/Sandbox/job/sandbox_nuxeo-labs-studio-elements-master/'><img src='https://qa.nuxeo.org/jenkins/buildStatus/icon?job=Sandbox/sandbox_nuxeo-labs-studio-elements-master'></a>
+
 After cloning, and assuming `maven` is correctly installed:
 
     `mvn install`
