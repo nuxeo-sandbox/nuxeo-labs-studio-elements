@@ -8,7 +8,7 @@ Install the Nuxeo Pacakge in your server.
 
 In your widget/layout xhtml in Studio, make sure you have the following imports:
 
-    <h:outputScript src="/nuxeo-labs-studio-elements/bower_components/webcomponentsjs/webcomponents-lite.js" target="" />
+    <h:outputScript src="/nuxeo-labs-studio-elements/bower_components/webcomponentsjs/webcomponents-lite.min.js" target="" />
     <h:outputScript src="/nuxeo-labs-studio-elements/bower_components/moment/min/moment-with-locales.min.js" target="" />
     <nxr:import src="/nuxeo-labs-studio-elements/elements/elements.vulcanized.html" target="" />
 
@@ -17,6 +17,8 @@ You can then use any of the elements that have been imported via `nuxeo-labs-stu
 If you want to add more element(s), update `nuxeo-labs-studio-elements-web/bower.json` with the new import and add them to `nuxeo-labs-studio-elements-web/src/main/app/elements/elements.html`.
 
 You can perform a quick test of your new elements by adding them to `nuxeo-labs-studio-elements-web/src/main/app/index.html` and using `gulp serve` from within `nuxeo-labs-studio-elements-web`.
+
+An example widget is provided in the `example` folder.
 
 ## Building
 
