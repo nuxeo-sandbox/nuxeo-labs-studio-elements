@@ -1,6 +1,6 @@
 {
   "name": "nuxeo-labs-studio-elements",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dependencies for creating Web components in Nuxeo Studio.",
   "main": "nuxeo-labs-studio-elements.html",
   "dependencies": {
@@ -11,7 +11,7 @@
     "nuxeo-elements": "nuxeo/nuxeo-elements#^0.4.0",
     "nuxeo-dataviz-elements": "nuxeo/nuxeo-dataviz-elements#^0.4.0",
     "moment": "2.10.6",
-    "nuxeo-labs-elements": "nuxeo-sandbox/nuxeo-labs-elements#^3.6.0",
+    "nuxeo-labs-elements": "nuxeo-sandbox/nuxeo-labs-elements#^3.7.0",
     "chart-elements": "nuxeo/chart-elements#nuxeo-chart-elements"
   }
 }
