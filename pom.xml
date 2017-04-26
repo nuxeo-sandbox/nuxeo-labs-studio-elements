@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.nuxeo.ecm.distribution</groupId>
-    <artifactId>nuxeo-distribution</artifactId>
-    <version>8.3</version>
+    <groupId>org.nuxeo</groupId>
+    <artifactId>nuxeo-addons-parent</artifactId>
+    <version>8.10</version>
   </parent>
 
   <groupId>org.nuxeo.labs.studio.elements</groupId>
   <artifactId>nuxeo-labs-studio-elements-parent</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>8.10-SNAPSHOT</version>
   <name>Nuxeo Labs Studio Elements parent</name>
   <description>Parent project for nuxeo-labs-studio-elements.</description>
   <packaging>pom</packaging>
@@ -19,6 +19,13 @@
     <module>nuxeo-labs-studio-elements-web</module>
     <module>nuxeo-labs-studio-elements-np</module>
   </modules>
+
+  <properties>
+    <nuxeo.project.version>${project.version}</nuxeo.project.version>
+    <nuxeo.version>8.10</nuxeo.version>
+    <nuxeo.distribution.version>8.10</nuxeo.distribution.version>
+    <nuxeo.labs.studio.elements.version>8.10-SNAPSHOT</nuxeo.labs.studio.elements.version>
+  </properties>
 
   <repositories>
     <repository>
@@ -74,12 +81,19 @@
       <dependency>
         <groupId>org.nuxeo.labs.studio.elements</groupId>
         <artifactId>nuxeo-labs-studio-elements-web</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.labs.studio.elements.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.labs.studio.elements</groupId>
         <artifactId>nuxeo-labs-studio-elements-np</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.labs.studio.elements.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.distribution</groupId>
+        <artifactId>nuxeo-distribution</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${nuxeo.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
