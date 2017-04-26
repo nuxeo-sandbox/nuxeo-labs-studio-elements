@@ -88,6 +88,13 @@
         <artifactId>nuxeo-labs-studio-elements-np</artifactId>
         <version>${nuxeo.labs.studio.elements.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.distribution</groupId>
+        <artifactId>nuxeo-distribution</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${nuxeo.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
